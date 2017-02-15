@@ -90,21 +90,21 @@ void ShopWindow::process(){
 }
 
 void ShopWindow::onBuyBtn1Clicked(GuiButton* button, const GuiController* controller, GuiTrigger* trigger){
-    MainWindowTV->sliceMultiplier += 17; 
+    MainWindowTV::sliceMultiplier += 17; 
     itemAmount[0]++;
     itemPrice[0] += 300 * itemAmount[0];
     sprintf(cowText, "Buy 1 for %d. Current amount: %d", itemPrice[0], itemAmount[0]); 
 }
 
 void ShopWindow::onBuyBtn2Clicked(GuiButton* button, const GuiController* controller, GuiTrigger* trigger){
-    MainWindowTV->sliceMultiplier += 786;
+    MainWindowTV::sliceMultiplier += 786;
     itemAmount[1]++;
     itemPrice[1] += 10000 * itemAmount[1];
     sprintf(maidText, "Buy 1 for %d. Current amount: %d", itemPrice[1], itemAmount[1]);
 }
 
 void ShopWindow::onBuyBtn3Clicked(GuiButton* button, const GuiController* controller, GuiTrigger* trigger){
-    MainWindowTV->sliceMultiplier += 47689;
+    MainWindowTV::sliceMultiplier += 47689;
     itemAmount[2]++;
     itemPrice[2] += 50000000 * itemAmount[2];
     sprintf(dairyText, "Buy 1 for %d. Current amount: %d", itemPrice[2], itemAmount[2]);

@@ -23,6 +23,7 @@ MainWindowTV::MainWindowTV(int w, int h)
     , width(w)
     , height(h)
     ,bgImageColor(w, h, (GX2Color){ 0, 0, 0, 0 })
+    ,sliceMultiplier(0)
 {
     bgImageColor.setImageColor((GX2Color){  248, 248, 249, 255 }, 0);
     bgImageColor.setImageColor((GX2Color){  248, 248, 249, 255 }, 1);
