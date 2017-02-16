@@ -21,15 +21,17 @@
 #include "gui/Gui.h"
 #include "gui/GuiMainWindowScreen.h"
 #include "gui/VPadController.h"
+#include "menu/ShopWindow.h"
 
 class CVideo;
+
+static int sliceMultiplier;
 
 class MainWindowTV : public GuiMainWindowScreen, public sigslot::has_slots<>{
 public:
     MainWindowTV(int w, int h);
     virtual ~MainWindowTV();
 
-    double sliceMultiplier;
 private:
     void onShopBtnClick(GuiButton* button, const GuiController* controller, GuiTrigger* trigger);
    
@@ -42,7 +44,7 @@ private:
     
     bool clicked = FALSE;
     
-    double slices;
+    int slices;
 
     bool valid = TRUE;
     

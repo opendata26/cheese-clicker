@@ -1,7 +1,7 @@
 /****************************************************************************
  * Loadiine resource files.
  * This file is generated automatically.
- * Includes 9 files.
+ * Includes 10 files.
  *
  * NOTE:
  * Any manual modification of this file will be overwriten by the generation.
@@ -19,6 +19,9 @@ typedef struct _RecourceFile
 	u8		   *CustomFile;
 	u32		    CustomFileSize;
 } RecourceFile;
+
+extern const u8 backBtn_png[];
+extern const u32 backBtn_png_size;
 
 extern const u8 backgroundBtn_png[];
 extern const u32 backgroundBtn_png_size;
@@ -49,6 +52,7 @@ extern const u32 shop_button_png_size;
 
 static RecourceFile RecourceList[] =
 {
+	{"backBtn.png", backBtn_png, backBtn_png_size, NULL, 0},
 	{"backgroundBtn.png", backgroundBtn_png, backgroundBtn_png_size, NULL, 0},
 	{"backgroundBuyBtn.png", backgroundBuyBtn_png, backgroundBuyBtn_png_size, NULL, 0},
 	{"cheese1.png", cheese1_png, cheese1_png_size, NULL, 0},

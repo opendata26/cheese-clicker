@@ -23,14 +23,14 @@ MainWindowTV::MainWindowTV(int w, int h)
     , width(w)
     , height(h)
     ,bgImageColor(w, h, (GX2Color){ 0, 0, 0, 0 })
-    ,sliceMultiplier(0)
 {
     bgImageColor.setImageColor((GX2Color){  248, 248, 249, 255 }, 0);
     bgImageColor.setImageColor((GX2Color){  248, 248, 249, 255 }, 1);
     bgImageColor.setImageColor((GX2Color){  248, 248, 249, 255 }, 2);
     bgImageColor.setImageColor((GX2Color){  248, 248, 249, 255 }, 3);
     append(&bgImageColor);
-    
+   
+    sliceMultiplier = 0;
     touchTrigger = new GuiTrigger(GuiTrigger::CHANNEL_1, GuiTrigger::VPAD_TOUCH);
 
     clickSound = new GuiSound(Resources::GetFile("click.mp3"), Resources::GetFileSize("click.mp3"));
@@ -96,9 +96,6 @@ void MainWindowTV::update(GuiController * c){
 void MainWindowTV::process(){
     GuiMainWindowScreen::process();
     
-    if(sliceMultiplier == 0)
-        sliceMultiplier = 1;
-
     if(clicked == 1){
         if(currentAnimStage == 2) {
             currentAnimStage = 0;
@@ -108,7 +105,7 @@ void MainWindowTV::process(){
             cheese->setImageData(cheeseAnim[currentAnimStage]);
         }
 
-        slices += sliceMultiplier;
+        slices += 1 + sliceMultiplier;
         clicked = 0;
         sprintf(slicesChar, "%d slices", slices); 
         slicesText->setText(slicesChar);
@@ -121,11 +118,11 @@ void MainWindowTV::onShopBtnClick(GuiButton* button, const GuiController* contro
 {
     shopBtn->setState(GuiElement::STATE_DISABLED);
     //! show equal screen on settings
-    //SettingsMenu * settings = new SettingsMenu(width, height);
+    ShopWindow* settings = new ShopWindow(width, height);
     //settings->setEffect(EFFECT_FADE, 10, 255);
     //settings->setState(GuiElement::STATE_DISABLED);
     //settings->settingsQuitClicked.connect(this, &MainWindow::OnSettingsQuit);
     //settings->effectFinished.connect(this, &MainWindow::OnOpenEffectFinish);
-    //append(settings);
+    append(settings);
 }
 

@@ -32,9 +32,9 @@ public:
 
 private:
     
-    char *cowDesc = "A cow that gives you 17 more slices per click";
-    char *maidDesc = "A maid that gives 786 more slices per click";
-    char *dairyDesc = "A dairy that gives 47689 more slices per click";
+    char *cowDesc = "A cow that gives you 17 more slices \n per click";
+    char *maidDesc = "A maid that gives 786 more slices \n per click";
+    char *dairyDesc = "A dairy that gives 47689 more \n slices per click";
     char *cowText = "Buy 1 for 300";
     char *maidText = "Buy 1 for 10000"; 
     char *dairyText = "Buy 1 for 50000000";
@@ -50,20 +50,21 @@ private:
     GuiImageData* bgImgData;
     GuiImageData* backgroundDescImgData;
     GuiImageData* backgroundBuyBtnImgData;
-    
+    GuiImageData* backBtnImgData;
+
     GuiButton* buyBtn[3]; 
-    
+    GuiButton* backBtn;
+
     GuiTrigger* touchTrigger;
 
     GuiImage* backgroundDescImg[3];
-    GuiImage* backgroundBuyBtnImg;
+    GuiImage* backgroundBuyBtnImg[3];
+    GuiImage* backBtnImg;
 
     GuiText* buyText[3];
     GuiText* itemDescText[3];
     
-    void draw(CVideo *v);
     void update(GuiController * c);
-    void process();
     void onBuyBtn1Clicked(GuiButton* button, const GuiController* controller, GuiTrigger* trigger);
     void onBuyBtn2Clicked(GuiButton* button, const GuiController* controller, GuiTrigger* trigger);
     void onBuyBtn3Clicked(GuiButton* button, const GuiController* controller, GuiTrigger* trigger);

@@ -30,46 +30,95 @@ ShopWindow::ShopWindow(int w, int h)
     bgImageColor.setImageColor((GX2Color){  248, 248, 249, 255 }, 3);
     append(&bgImageColor);
     
+    
     touchTrigger = new GuiTrigger(GuiTrigger::CHANNEL_1, GuiTrigger::VPAD_TOUCH);
 
     clickSound = new GuiSound(Resources::GetFile("click.mp3"), Resources::GetFileSize("click.mp3"));
-    
+   
+   
     buyText[0] = new GuiText(cowText, 40, glm::vec4(0, 0, 0, 1));
     buyText[1] = new GuiText(maidText, 40, glm::vec4(0, 0, 0, 1));
     buyText[2] = new GuiText(dairyText, 40, glm::vec4(0, 0, 0, 1));
-    itemDescText[0] = new GuiText(cowDesc, 40, glm::vec4(0, 0, 0, 1));
-    itemDescText[1] = new GuiText(maidDesc, 40, glm::vec4(0, 0, 0, 1));
-    itemDescText[2] = new GuiText(dairyDesc, 40, glm::vec4(0, 0, 0, 1));
+    itemDescText[0] = new GuiText(cowDesc, 25, glm::vec4(0, 0, 0, 1));
+    itemDescText[1] = new GuiText(maidDesc, 25, glm::vec4(0, 0, 0, 1));
+    itemDescText[2] = new GuiText(dairyDesc, 25, glm::vec4(0, 0, 0, 1));
 
     backgroundDescImgData = Resources::GetImageData("backgroundBtn.png");
-    for(int i=0;i<2;i++) backgroundDescImg[i] = new GuiImage(backgroundDescImgData);
-    for(int i=0;i<2;i++) backgroundDescImg[i]->setAlignment(ALIGN_CENTER | ALIGN_CENTER );
-    backgroundDescImg[0]->setPosition(0, 40);
+    backgroundDescImg[0] = new GuiImage(backgroundDescImgData);
+    backgroundDescImg[0]->setAlignment(ALIGN_CENTER | ALIGN_CENTER);
+    backgroundDescImg[1] = new GuiImage(backgroundDescImgData);
+    backgroundDescImg[1]->setAlignment(ALIGN_CENTER | ALIGN_CENTER);
+    backgroundDescImg[2] = new GuiImage(backgroundDescImgData);
+    backgroundDescImg[2]->setAlignment(ALIGN_CENTER | ALIGN_CENTER);
+    backgroundDescImg[0]->setPosition(0, 200);
     backgroundDescImg[1]->setPosition(0, 0);
-    backgroundDescImg[2]->setPosition(0, -40);
-    for(int i=0;i<2;i++) append(backgroundDescImg[i]);
+    backgroundDescImg[2]->setPosition(0, -200);
+    itemDescText[0]->setAlignment(ALIGN_CENTER | ALIGN_CENTER);
+    itemDescText[1]->setAlignment(ALIGN_CENTER | ALIGN_CENTER);
+    itemDescText[2]->setAlignment(ALIGN_CENTER | ALIGN_CENTER);
+    itemDescText[0]->setPosition(-230, 195);
+    itemDescText[1]->setPosition(-230, -5);
+    itemDescText[2]->setPosition(-230, -205);
+    append(backgroundDescImg[0]);
+    append(backgroundDescImg[1]);
+    append(backgroundDescImg[2]);
+    append(itemDescText[0]);
+    append(itemDescText[1]);
+    append(itemDescText[2]);
+ 
 
     backgroundBuyBtnImgData = Resources::GetImageData("backgroundBuyBtn.png");
-    backgroundBuyBtnImg = new GuiImage(backgroundBuyBtnImgData);
+    backgroundBuyBtnImg[0] = new GuiImage(backgroundBuyBtnImgData);
+    backgroundBuyBtnImg[1] = new GuiImage(backgroundBuyBtnImgData);
+    backgroundBuyBtnImg[2] = new GuiImage(backgroundBuyBtnImgData);
 
-    for(int i=0;i<2;i++){
-        buyBtn[i] = new GuiButton(backgroundBuyBtnImg->getWidth(), backgroundBuyBtnImg->getHeight());
-        buyBtn[i]->setImage(backgroundBuyBtnImg);
-        buyBtn[i]->setAlignment(ALIGN_CENTER | ALIGN_CENTER);
-        buyBtn[i]->setTrigger(touchTrigger);
-        buyBtn[i]->setSoundClick(clickSound);
-        buyBtn[i]->setEffectGrow();
-    }
-    buyBtn[0]->setPosition(20, 40);
-    buyBtn[1]->setPosition(20, 0);
-    buyBtn[2]->setPosition(20, -40);
+    buyBtn[0] = new GuiButton(backgroundBuyBtnImg[0]->getWidth(), backgroundBuyBtnImg[0]->getHeight());
+    buyBtn[0]->setImage(backgroundBuyBtnImg[0]);
+    buyBtn[0]->setAlignment(ALIGN_CENTER | ALIGN_CENTER);
+    buyBtn[0]->setTrigger(touchTrigger);
+    buyBtn[0]->setSoundClick(clickSound);
+    buyBtn[0]->setEffectGrow();
+
+    buyBtn[1] = new GuiButton(backgroundBuyBtnImg[1]->getWidth(), backgroundBuyBtnImg[1]->getHeight());
+    buyBtn[1]->setImage(backgroundBuyBtnImg[1]);
+    buyBtn[1]->setAlignment(ALIGN_CENTER | ALIGN_CENTER);
+    buyBtn[1]->setTrigger(touchTrigger);
+    buyBtn[1]->setSoundClick(clickSound);
+    buyBtn[1]->setEffectGrow();
+    
+    buyBtn[2] = new GuiButton(backgroundBuyBtnImg[2]->getWidth(), backgroundBuyBtnImg[2]->getHeight());
+    buyBtn[2]->setImage(backgroundBuyBtnImg[2]);
+    buyBtn[2]->setAlignment(ALIGN_CENTER | ALIGN_CENTER);
+    buyBtn[2]->setTrigger(touchTrigger);
+    buyBtn[2]->setSoundClick(clickSound);
+    buyBtn[2]->setEffectGrow();
+
+    buyBtn[0]->setPosition(250, 200);
+    buyBtn[1]->setPosition(250, 0);
+    buyBtn[2]->setPosition(250, -200);
     buyBtn[0]->setLabel(buyText[0]);
     buyBtn[1]->setLabel(buyText[1]);
     buyBtn[2]->setLabel(buyText[2]);
     buyBtn[0]->clicked.connect(this, &ShopWindow::onBuyBtn1Clicked);//todo: Clean this up
     buyBtn[1]->clicked.connect(this, &ShopWindow::onBuyBtn2Clicked);//
     buyBtn[2]->clicked.connect(this, &ShopWindow::onBuyBtn3Clicked);//
-    for(int i=0;i<2;i++) append(buyBtn[i]);
+    append(buyBtn[0]);
+    append(buyBtn[1]);
+    append(buyBtn[2]);
+
+    backBtnImgData = Resources::GetImageData("backBtn.png");
+    backBtnImg = new GuiImage(backBtnImgData);
+ 
+    backBtn = new GuiButton(backBtnImg->getWidth(), backBtnImg->getHeight());
+
+    backBtn->setImage(backBtnImg);
+    backBtn->setAlignment(ALIGN_BOTTOM | ALIGN_LEFT);
+    backBtn->setTrigger(touchTrigger);
+    //backBtn->clicked.connect(this, &ShopWindow::onBackBtnClick);
+    backBtn->setSoundClick(clickSound);
+    backBtn->setEffectGrow();
+    append(backBtn);
+
 
 }
 
@@ -78,33 +127,27 @@ ShopWindow::~ShopWindow()
     remove(&bgImageColor);
 }
 
-void ShopWindow::draw(CVideo *v){
-}
-
-
 void ShopWindow::update(GuiController * c){
-
+    GuiFrame::update(c);
 }
 
-void ShopWindow::process(){
-}
 
 void ShopWindow::onBuyBtn1Clicked(GuiButton* button, const GuiController* controller, GuiTrigger* trigger){
-    MainWindowTV::sliceMultiplier += 17; 
+    sliceMultiplier += 17; 
     itemAmount[0]++;
     itemPrice[0] += 300 * itemAmount[0];
     sprintf(cowText, "Buy 1 for %d. Current amount: %d", itemPrice[0], itemAmount[0]); 
 }
 
 void ShopWindow::onBuyBtn2Clicked(GuiButton* button, const GuiController* controller, GuiTrigger* trigger){
-    MainWindowTV::sliceMultiplier += 786;
+    sliceMultiplier += 786;
     itemAmount[1]++;
     itemPrice[1] += 10000 * itemAmount[1];
     sprintf(maidText, "Buy 1 for %d. Current amount: %d", itemPrice[1], itemAmount[1]);
 }
 
 void ShopWindow::onBuyBtn3Clicked(GuiButton* button, const GuiController* controller, GuiTrigger* trigger){
-    MainWindowTV::sliceMultiplier += 47689;
+    sliceMultiplier += 47689;
     itemAmount[2]++;
     itemPrice[2] += 50000000 * itemAmount[2];
     sprintf(dairyText, "Buy 1 for %d. Current amount: %d", itemPrice[2], itemAmount[2]);
