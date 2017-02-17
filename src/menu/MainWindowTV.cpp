@@ -132,7 +132,7 @@ void MainWindowTV::onShopQuit(GuiElement *element)
     element->setState(GuiElement::STATE_DISABLED);
 
     //! setup the main view 
-    MainWindow::SetupMainView();
+    MainWindow::SetupMainView(); //how can i do this without moving onShopQuit to MainWindow
 
     //! re-append the deleting element at the end of the draw list
     append(element);
