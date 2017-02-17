@@ -121,8 +121,19 @@ void MainWindowTV::onShopBtnClick(GuiButton* button, const GuiController* contro
     ShopWindow* settings = new ShopWindow(width, height);
     //settings->setEffect(EFFECT_FADE, 10, 255);
     //settings->setState(GuiElement::STATE_DISABLED);
-    //settings->settingsQuitClicked.connect(this, &MainWindow::OnSettingsQuit);
+    settings->shopQuitClicked.connect(this, &MainWindowTV::onShopQuit);
     //settings->effectFinished.connect(this, &MainWindow::OnOpenEffectFinish);
     append(settings);
 }
 
+void MainWindowTV::onShopQuit(GuiElement *element)
+{
+    //! disable element for triggering buttons again
+    element->setState(GuiElement::STATE_DISABLED);
+
+    //! setup the main view 
+    MainWindow::SetupMainView();
+
+    //! re-append the deleting element at the end of the draw list
+    append(element);
+}

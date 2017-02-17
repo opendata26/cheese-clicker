@@ -114,7 +114,7 @@ ShopWindow::ShopWindow(int w, int h)
     backBtn->setImage(backBtnImg);
     backBtn->setAlignment(ALIGN_BOTTOM | ALIGN_LEFT);
     backBtn->setTrigger(touchTrigger);
-    //backBtn->clicked.connect(this, &ShopWindow::onBackBtnClick);
+    backBtn->clicked.connect(this, &ShopWindow::onBackBtnClick);
     backBtn->setSoundClick(clickSound);
     backBtn->setEffectGrow();
     append(backBtn);

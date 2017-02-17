@@ -22,7 +22,7 @@
 #include "gui/GuiMainWindowScreen.h"
 #include "gui/VPadController.h"
 #include "menu/ShopWindow.h"
-
+#include "menu/MainWindow.h"
 class CVideo;
 
 static int sliceMultiplier;
@@ -51,6 +51,8 @@ private:
     GuiImage bgImageColor;
 
     GuiSound *clickSound;
+    
+    GuiMainWindowScreen * Frame;
 
     GuiImageData* bgImgData;
     GuiImageData* cheeseAnim[3];
@@ -68,6 +70,8 @@ private:
     void draw(CVideo *v);
     void update(GuiController * c);
     void process();
+    void onShopQuit(GuiElement *element);
+
 };
 
 #endif //_MAIN_WINDOW_TV_H_

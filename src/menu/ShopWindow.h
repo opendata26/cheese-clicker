@@ -30,6 +30,7 @@ public:
     ShopWindow(int w, int h);
     virtual ~ShopWindow();
 
+    sigslot::signal1<GuiElement *> shopQuitClicked;
 private:
     
     char *cowDesc = "A cow that gives you 17 more slices \n per click";
@@ -68,7 +69,10 @@ private:
     void onBuyBtn1Clicked(GuiButton* button, const GuiController* controller, GuiTrigger* trigger);
     void onBuyBtn2Clicked(GuiButton* button, const GuiController* controller, GuiTrigger* trigger);
     void onBuyBtn3Clicked(GuiButton* button, const GuiController* controller, GuiTrigger* trigger);
-
+    
+    void onBackBtnClicked(GuiButton *button, const GuiController *controller, GuiTrigger *trigger){
+        shopQuitClicked(this);
+    }
 };
 
 #endif //_SHOP_WINDOW_H_
