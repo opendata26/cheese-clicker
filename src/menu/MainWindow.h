@@ -133,6 +133,8 @@ private:
 
     void OnOpenEffectFinish(GuiElement *element);
     void OnCloseEffectFinish(GuiElement *element);
+    void OnShopButtonClicked(GuiElement*);
+    void OnShopBackButtonClicked(GuiElement*);   
 
     int width, height;
     std::vector<GuiElement *> drcElements;

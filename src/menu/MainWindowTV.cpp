@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ****************************************************************************/
-#include "MainWindowTV.h"
+#include "menu/MainWindowTV.h"
 #include "utils/logger.h"
 
 MainWindowTV::MainWindowTV(int w, int h)
@@ -42,7 +42,7 @@ MainWindowTV::MainWindowTV(int w, int h)
     shopBtn->setImage(shopBtnImg);
     shopBtn->setAlignment(ALIGN_BOTTOM | ALIGN_LEFT);
     shopBtn->setTrigger(touchTrigger);
-    shopBtn->clicked.connect(this, &MainWindowTV::onShopBtnClick);
+    shopBtn->clicked.connect(this, &MainWindowTV::onShopBtnClicked);
     shopBtn->setSoundClick(clickSound);
     shopBtn->setEffectGrow();
     append(shopBtn);
@@ -114,26 +114,3 @@ void MainWindowTV::process(){
 
 }
 
-void MainWindowTV::onShopBtnClick(GuiButton* button, const GuiController* controller, GuiTrigger* trigger)
-{
-    shopBtn->setState(GuiElement::STATE_DISABLED);
-    //! show equal screen on settings
-    ShopWindow* settings = new ShopWindow(width, height);
-    //settings->setEffect(EFFECT_FADE, 10, 255);
-    //settings->setState(GuiElement::STATE_DISABLED);
-    settings->shopQuitClicked.connect(this, &MainWindowTV::onShopQuit);
-    //settings->effectFinished.connect(this, &MainWindow::OnOpenEffectFinish);
-    append(settings);
-}
-
-void MainWindowTV::onShopQuit(GuiElement *element)
-{
-    //! disable element for triggering buttons again
-    element->setState(GuiElement::STATE_DISABLED);
-
-    //! setup the main view 
-    MainWindow::SetupMainView(); //how can i do this without moving onShopQuit to MainWindow
-
-    //! re-append the deleting element at the end of the draw list
-    append(element);
-}

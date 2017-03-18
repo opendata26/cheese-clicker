@@ -31,6 +31,8 @@ class MainWindowTV : public GuiMainWindowScreen, public sigslot::has_slots<>{
 public:
     MainWindowTV(int w, int h);
     virtual ~MainWindowTV();
+    
+    sigslot::signal1<GuiElement *> shopButtonClicked;
 
 private:
     void onShopBtnClick(GuiButton* button, const GuiController* controller, GuiTrigger* trigger);
@@ -70,7 +72,11 @@ private:
     void draw(CVideo *v);
     void update(GuiController * c);
     void process();
-    void onShopQuit(GuiElement *element);
+    void onShopBtnClicked(GuiButton* button, const GuiController* controller, GuiTrigger* trigger)            
+    {
+        shopButtonClicked(this);                                                                                                
+    }   
+
 
 };
 

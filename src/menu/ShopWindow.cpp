@@ -39,6 +39,7 @@ ShopWindow::ShopWindow(int w, int h)
     buyText[0] = new GuiText(cowText, 40, glm::vec4(0, 0, 0, 1));
     buyText[1] = new GuiText(maidText, 40, glm::vec4(0, 0, 0, 1));
     buyText[2] = new GuiText(dairyText, 40, glm::vec4(0, 0, 0, 1));
+    
     itemDescText[0] = new GuiText(cowDesc, 25, glm::vec4(0, 0, 0, 1));
     itemDescText[1] = new GuiText(maidDesc, 25, glm::vec4(0, 0, 0, 1));
     itemDescText[2] = new GuiText(dairyDesc, 25, glm::vec4(0, 0, 0, 1));
@@ -53,15 +54,18 @@ ShopWindow::ShopWindow(int w, int h)
     backgroundDescImg[0]->setPosition(0, 200);
     backgroundDescImg[1]->setPosition(0, 0);
     backgroundDescImg[2]->setPosition(0, -200);
+    
     itemDescText[0]->setAlignment(ALIGN_CENTER | ALIGN_CENTER);
     itemDescText[1]->setAlignment(ALIGN_CENTER | ALIGN_CENTER);
     itemDescText[2]->setAlignment(ALIGN_CENTER | ALIGN_CENTER);
     itemDescText[0]->setPosition(-230, 195);
     itemDescText[1]->setPosition(-230, -5);
     itemDescText[2]->setPosition(-230, -205);
+    
     append(backgroundDescImg[0]);
     append(backgroundDescImg[1]);
     append(backgroundDescImg[2]);
+    
     append(itemDescText[0]);
     append(itemDescText[1]);
     append(itemDescText[2]);
@@ -96,12 +100,15 @@ ShopWindow::ShopWindow(int w, int h)
     buyBtn[0]->setPosition(250, 200);
     buyBtn[1]->setPosition(250, 0);
     buyBtn[2]->setPosition(250, -200);
+    
     buyBtn[0]->setLabel(buyText[0]);
     buyBtn[1]->setLabel(buyText[1]);
     buyBtn[2]->setLabel(buyText[2]);
+    
     buyBtn[0]->clicked.connect(this, &ShopWindow::onBuyBtn1Clicked);//todo: Clean this up
     buyBtn[1]->clicked.connect(this, &ShopWindow::onBuyBtn2Clicked);//
     buyBtn[2]->clicked.connect(this, &ShopWindow::onBuyBtn3Clicked);//
+    
     append(buyBtn[0]);
     append(buyBtn[1]);
     append(buyBtn[2]);
@@ -110,11 +117,10 @@ ShopWindow::ShopWindow(int w, int h)
     backBtnImg = new GuiImage(backBtnImgData);
  
     backBtn = new GuiButton(backBtnImg->getWidth(), backBtnImg->getHeight());
-
     backBtn->setImage(backBtnImg);
     backBtn->setAlignment(ALIGN_BOTTOM | ALIGN_LEFT);
     backBtn->setTrigger(touchTrigger);
-    backBtn->clicked.connect(this, &ShopWindow::onBackBtnClick);
+    backBtn->clicked.connect(this, &ShopWindow::onBackBtnClicked);
     backBtn->setSoundClick(clickSound);
     backBtn->setEffectGrow();
     append(backBtn);
@@ -152,4 +158,5 @@ void ShopWindow::onBuyBtn3Clicked(GuiButton* button, const GuiController* contro
     itemPrice[2] += 50000000 * itemAmount[2];
     sprintf(dairyText, "Buy 1 for %d. Current amount: %d", itemPrice[2], itemAmount[2]);
 }
+
 

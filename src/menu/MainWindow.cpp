@@ -201,8 +201,11 @@ void MainWindow::SetupMainView()
 {
 
     //DrcFrame =  new MainWindowDRC(width,height);
-    TvFrame =  new MainWindowTV(width,height);
+    TvFrame = new MainWindowTV(width,height);
+    TvFrame->shopButtonClicked.connect(this, &MainWindow::OnShopButtonClicked); 
+
     DrcFrame =  TvFrame;
+    
     appendTv(TvFrame);
     appendDrc(DrcFrame);
 }
@@ -219,4 +222,36 @@ void MainWindow::OnCloseEffectFinish(GuiElement *element)
     //! remove element from draw list and push to delete queue
     remove(element);
     AsyncDeleter::pushForDelete(element);
+}
+
+void MainWindow::OnShopButtonClicked(GuiElement *element)
+{
+
+    //! disable element for triggering buttons again
+    TvFrame->setState(GuiElement::STATE_DISABLED);
+    TvFrame->setEffect(EFFECT_FADE, -10, 0);
+    TvFrame->effectFinished.connect(this, &MainWindow::OnCloseEffectFinish);
+    TvFrame = NULL;
+    DrcFrame = NULL;
+
+    //! show equal screen on settings
+    ShopWindow *shop = new ShopWindow(width, height);
+    shop->setEffect(EFFECT_FADE, 10, 255);
+    shop->setState(GuiElement::STATE_DISABLED);
+    shop->backButtonClicked.connect(this, &MainWindow::OnShopBackButtonClicked);
+    shop->effectFinished.connect(this, &MainWindow::OnOpenEffectFinish);
+    append(shop);
+}
+
+void MainWindow::OnShopBackButtonClicked(GuiElement *element)
+{
+    //! disable element for triggering buttons again
+    element->setState(GuiElement::STATE_DISABLED);
+    element->setEffect(EFFECT_FADE, -10, 0);
+    element->effectFinished.connect(this, &MainWindow::OnCloseEffectFinish);
+
+    SetupMainView();
+
+    //! re-append the deleting element at the end of the draw list
+    append(element);
 }
