@@ -19,7 +19,7 @@
 #include "utils/logger.h"
 
 MainWindowTV::MainWindowTV(int w, int h)
-    : GuiMainWindowScreen(w, h)
+    : GuiFrame(w, h)
     , width(w)
     , height(h)
     ,bgImageColor(w, h, (GX2Color){ 0, 0, 0, 0 })
@@ -70,15 +70,8 @@ MainWindowTV::~MainWindowTV()
     delete(cheese);
 }
 
-void MainWindowTV::draw(CVideo *v){
-	GuiMainWindowScreen::draw(v);
-	//gets called on every frame for drawing
-}
-
-
 void MainWindowTV::update(GuiController * c){
-    GuiMainWindowScreen::update(c);
-    //CONTROLLER UPDATE!!!
+    GuiFrame::update(c);
     
     x=c->data.x;
     y=c->data.y;
@@ -87,30 +80,21 @@ void MainWindowTV::update(GuiController * c){
         log_printf("tapped");
         clickSound->Stop();
         clickSound->Play();
-        clicked = 1;
-    }
-    if(!valid && !c->data.touched)
-        valid = TRUE;
-}
-
-void MainWindowTV::process(){
-    GuiMainWindowScreen::process();
-    
-    if(clicked == 1){
-        if(currentAnimStage == 2) {
+        if(currentAnimStage == 2) { 
             currentAnimStage = 0;
             cheese->setImageData(cheeseAnim[currentAnimStage]);
         } else {
             currentAnimStage ++;
             cheese->setImageData(cheeseAnim[currentAnimStage]);
         }
-
-        slices += 1 + sliceMultiplier;
-        clicked = 0;
-        sprintf(slicesChar, "%d slices", slices); 
+        slices += 1 + sliceMultiplier; 
+        clicked = 0; 
+        sprintf(slicesChar, "%d slices", slices);
         slicesText->setText(slicesChar);
-        valid = FALSE;
+        valid = FALSE; 
     }
+    if(!valid && !c->data.touched)
+        valid = TRUE;
+
 
 }
-

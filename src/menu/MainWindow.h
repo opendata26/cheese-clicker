@@ -22,8 +22,9 @@
 #include <queue>
 #include "gui/Gui.h"
 #include "system/CMutex.h"
-#include "gui/GuiMainWindowScreen.h"
-
+#include "gui/GuiFrame.h"
+#include "menu/MainWindowTV.h"
+#include "menu/ShopWindow.h"
 class CVideo;
 
 class MainWindow : public sigslot::has_slots<>
@@ -142,8 +143,8 @@ private:
 
     GuiSound *ClickSound;
 
-    GuiMainWindowScreen * TvFrame;
-    GuiMainWindowScreen * DrcFrame;
+    MainWindowTV *TvFrame;
+    MainWindowTV *DrcFrame;
 
     GuiImageData *pointerImgData[4];
     GuiImage *pointerImg[4];

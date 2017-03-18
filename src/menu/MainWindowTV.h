@@ -21,13 +21,12 @@
 #include "gui/Gui.h"
 #include "gui/GuiMainWindowScreen.h"
 #include "gui/VPadController.h"
-#include "menu/ShopWindow.h"
-#include "menu/MainWindow.h"
+
 class CVideo;
 
 static int sliceMultiplier;
 
-class MainWindowTV : public GuiMainWindowScreen, public sigslot::has_slots<>{
+class MainWindowTV : public GuiFrame, public sigslot::has_slots<>{
 public:
     MainWindowTV(int w, int h);
     virtual ~MainWindowTV();
@@ -69,9 +68,7 @@ private:
 
     GuiText* slicesText;
     
-    void draw(CVideo *v);
     void update(GuiController * c);
-    void process();
     void onShopBtnClicked(GuiButton* button, const GuiController* controller, GuiTrigger* trigger)            
     {
         shopButtonClicked(this);                                                                                                
